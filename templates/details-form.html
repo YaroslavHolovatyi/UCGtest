@@ -9,44 +9,53 @@
   <div class="modal__main">
     <form ng-submit="submitForm()" name="userForm" novalidate>
         <label for="username">Username*</label>
-        <input type="text" name="username" ng-class="{'error-input' : userForm.username.$error.required && userForm.username.$dirty || usernameTaken}" ng-model="chosenUser.username" required ng-change="checkUsername()">
-        <span ng-show="userForm.username.$error.required && userForm.username.$dirty">Username is required</span>
+        <input 
+        type="text" 
+        name="username" 
+        ng-class="{'error-input' : userForm.username.$error.required && userForm.username.$touched || userForm.username.$dirty && usernameTaken}" 
+        ng-model="chosenUser.username" 
+        required ng-change="checkUsername()">
+        <span ng-show="userForm.username.$error.required && userForm.username.$touched">Username is required</span>
         <span ng-show="usernameTaken">Username already taken</span><br>
 
         <label>First Name*</label>
-        <input type="text" name="first_name" ng-model="chosenUser.first_name" required
-        ng-class="{'error-input' : userForm.first_name.$error.required && userForm.first_name.$dirty }">
-        <span ng-show="userForm.first_name.$error.required && userForm.first_name.$dirty">First Name is required</span>
+        <input 
+        type="text" 
+        name="first_name" 
+        ng-model="chosenUser.first_name" 
+        required
+        ng-class="{'error-input' :userForm.first_name.$error.required && userForm.first_name.$touched }">
+        <span ng-show="userForm.first_name.$error.required && userForm.first_name.$touched">First Name is required</span><br>
 
         <label>Last Name*</label>
         <input type="text" name="last_name" ng-model="chosenUser.last_name" required
-        ng-class="{'error-input' : userForm.last_name.$error.required && userForm.last_name.$dirty }">
-        <span ng-show="userForm.last_name.$error.required && userForm.last_name.$dirty">Last Name is required</span>
+        ng-class="{'error-input' :userForm.last_name.$error.required && userForm.last_name.$touched}">
+        <span ng-show="userForm.last_name.$error.required && userForm.last_name.$touched">Last Name is required</span><br>
 
         <label>Email*</label>
         <input type="email" name="email" ng-model="chosenUser.email" required ng-change="checkEmail()"
-        ng-class="{'error-input' : userForm.email.$error.required && userForm.email.$dirty || emailTaken}">
-        <span ng-show="userForm.email.$error.required && userForm.email.$dirty">Email is required</span>
+          ng-class="{'error-input' : userForm.email.$error.required && userForm.email.$touched || userForm.email.$dirty && emailTaken}">
+        <span ng-show="userForm.email.$error.required && userForm.email.$touched">Email is required</span><br>
         <span ng-show="emailTaken">Email already taken</span><br>
       
         <label>User Type*</label>
         <select ng-model="chosenUser.user_type" required name="user_type"
-        ng-class="{'error-input' : userForm.user_type.$error.required && userForm.user_type.$dirty }">
+        ng-class="{'error-input' :  userForm.user_type.$error.required && userForm.user_type.$touched }">
           <option value="Admin">Admin</option>
           <option value="Driver">Driver</option>
         </select>
-        <span ng-show="userForm.user_type.$error.required && userForm.user_type.$dirty">User Type is required</span><br>
+        <span ng-show=" userForm.user_type.$error.required && userForm.user_type.$touched">User Type is required</span><br>
       
         <label>Password*</label>
         <input type="password" name="password" ng-model="chosenUser.password" required ng-change="checkPasswords()"
-        ng-class="{'error-input' : userForm.password.$error.required && userForm.password.$dirty }">
-        <span ng-show="userForm.password.$error.required && userForm.password.$dirty">Password is required</span><br>
+        ng-class="{'error-input' : userForm.password.$error.required && userForm.password.$touched }">
+        <span ng-show="userForm.password.$error.required && userForm.password.$touched">Password is required</span><br>
       
         <label>Repeat Password*</label>
         <input type="password" name="repeatPassword" ng-model="repeatPassword" required ng-change="checkPasswords()"
-        ng-class="{'error-input' : userForm.repeatPassword.$error.required && userForm.repeatPassword.$dirty || !passwordsMatch}">
-        <span ng-show="userForm.repeatPassword.$error.required || userForm.repeatPassword.$error.required && userForm.repeatPassword.$dirty">Repeat Password is required</span>
-        <span ng-show="userForm.repeatPassword.$dirty && !passwordsMatch">Passwords should match</span><br>
+        ng-class="{'error-input' : userForm.repeatPassword.$error.required && userForm.repeatPassword.$touched || userForm.repeatPassword.$touched && !passwordsMatch}">
+        <span ng-show="userForm.repeatPassword.$error.required && userForm.repeatPassword.$touched">Repeat Password is required</span><br>
+        <span ng-show=" userForm.repeatPassword.$dirty && !passwordsMatch">Passwords should match</span><br>
       
         <div class="modal__create" ng-show="typeOfModal">
           <button class="submit" ng-disabled="userForm.$invalid" type="submit">Save</button>

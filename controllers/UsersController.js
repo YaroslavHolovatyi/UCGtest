@@ -1,9 +1,9 @@
 
 angular.module('usersApplication')
     .controller('UsersController', UsersController)
-    UsersController.$inject = ['$scope', 'UsersService', 'ModalsService'];
+    UsersController.$inject = ['$scope', 'UsersService', 'ModalsService', '$element'];
 
-    function UsersController($scope, UsersService, ModalsService){
+    function UsersController($scope, UsersService, ModalsService, $element){
         $scope.usernameTaken = false;
         $scope.repeatPassword = '';
         $scope.emailTaken = false;
@@ -36,7 +36,7 @@ angular.module('usersApplication')
             if( $scope.allUsers.find((element)=>{element.email === $scope.chosenUser.email;})){
                 return this.emailTaken = true;
             }else{
-                return
+                return this.emailTaken = false;
             }
           };
 
@@ -88,7 +88,13 @@ angular.module('usersApplication')
 
           $scope.modalClose = function(){
             ModalsService.modalVisible = false;
+            $scope.resetFormState();
           }
+
+          $scope.resetFormState = function () {
+            $scope.userForm.$setPristine();
+            $scope.userForm.$setUntouched();
+          };
 
           $scope.getAllUsers();
       
