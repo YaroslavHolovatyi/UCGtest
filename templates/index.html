@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="usersApplication">
+    <head>
+        <title>My AngularJS App</title>
+        <script src="../node_modules/angular/angular.js"></script>
+        <script src="../app.js"></script>
+        <script src="../controllers/TableController.js"></script>
+        <script src="../controllers/UsersController.js"></script>
+        <script src="../controllers/ModalsController.js"></script>
+        <script src="../services/UsersService.js"></script>
+        <script src="../services/ModalsService.js"></script>
+        <link rel="stylesheet" href="../styles/table.css">
+        <link rel="stylesheet" href="../styles/details-form.css">
+        <link rel="stylesheet" href="../styles/module-message.css">
+        <title>UCG Angular.js Test App</title>
+    </head>
+    <body>
+        <div class="main" ng-controller="TableController">
+            <div class="main__head">
+                <h1>UCG test App</h1>
+                <button class="main__create"  ng-click="openDialog(user, true)">Create User</button>
+            </div>
+            <div class="main__table">
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>USERNAME</th>
+                            <th>FIRST NAME</th>
+                            <th>LAST NAME</th>
+                            <th>EMAIL</th>
+                            <th>TYPE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users" ng-click="openDialog(user, false)">
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.user_type }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="main__overlay" ng-show="modalIsVisible" ng-click="closeModal()"></div>
+            <div class="main__modal" ng-show="modalIsVisible">
+                <div ng-include="'details-form.html'"></div>
+            </div>
+
+            <div class="main__message" ng-show="showMessage">
+                <div ng-include="'module-message.html'"></div>
+            </div>
+        </div>
+    </body>
+</html>
